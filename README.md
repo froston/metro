@@ -1,18 +1,17 @@
-# Project Title
+# Metro App
 
 Metropolitan Ministry App - Schedule and Administrate Metropolitan Ministry.
 
 ## Getting Started
 
-Install dependencies
+Install dependencies and run server
 ```
 npm install
-```
 
-Start server locally
-```
 npm start
 ```
+
+Then open http://localhost:3000/.
 
 ## Built With
 
@@ -21,7 +20,7 @@ npm start
 * [Express](https://expressjs.com/) - Web framework for Node
 * [MongoDB](https://www.mongodb.com/) - NoSQL database
 
-## Authors
+## Author
 
 * **Pavel Müller**
 
