@@ -9,6 +9,7 @@ exports.getById = (req, res) =>{
     return user.id === req.params.id 
   })
   console.log(user)
+  res.json(user)
   res.status(200).send(user)
 }
 exports.post = (req, res) => {
@@ -22,6 +23,6 @@ exports.delete = (req, res) => {
   const test = data.find((user) => {
     return user.id === req.params.id 
   })
-  delete test
+  //delete test
   res.status(202).send(data)
 }
