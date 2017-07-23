@@ -1,6 +1,6 @@
 {
   "name": "metro",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Metropolitan ministry app",
   "scripts": {
     "dev:client": "webpack-dev-server",
