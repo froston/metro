@@ -35,6 +35,7 @@ const clientConfig = {
     ],
   },
   devServer: {
+    historyApiFallback: true,
     contentBase: path.join(__dirname, "public"),
     compress: true,
     hot: true,
