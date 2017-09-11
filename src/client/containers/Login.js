@@ -1,5 +1,6 @@
 import React , { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { auth } from '../helpers'
 
 class Login extends React.Component {
   state = {
@@ -7,9 +8,9 @@ class Login extends React.Component {
   }
 
   login = () => {
-    setTimeout(() => {
+    auth.authenticate("pavel", "pavel123sddssdssdsd", () => {
       this.setState({ redirectToReferrer: true })
-    }, 500)
+    })
   }
 
   render() {

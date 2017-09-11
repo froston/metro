@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { 
+  BrowserRouter as Router, 
+  Switch, 
+  Route, 
+  Redirect, 
+} from 'react-router-dom'
 import { Header, Footer, UserList, Login  } from './'
+import { auth } from '../helpers'
 import './App.css'
 
-const PrivateRoute = ({ component: Component, path }) => (
-  <Route path={path} render={props => (
-    false ? (
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    auth.isAuthenticated ? (
       <Component {...props}/>
     ) : (
       <Redirect to={{
@@ -14,7 +20,7 @@ const PrivateRoute = ({ component: Component, path }) => (
       }}/>
     )
   )}/>
-);
+)
 
 class App extends React.Component {
   render() {
@@ -22,9 +28,10 @@ class App extends React.Component {
         <Router>
           <div>
             <Header />
-            <PrivateRoute path="/" component={UserList} exact />
-            <PrivateRoute path="/users" component={UserList} exact />
-            <Route path="/login" component={Login} exact />
+            <Switch>
+              <Route path='/login' component={Login} />
+              <PrivateRoute path='/' component={UserList} />
+            </Switch>
             <Footer />
           </div>
         </Router>
