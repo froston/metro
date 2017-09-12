@@ -6,19 +6,26 @@ class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      redirectToReferrer: false
+      redirectToReferrer: false,
+      username: '',
+      password: '',
     }
   }
 
-  login = () => {
-    auth.authenticate("pavel", "pavel123d", () => {
+  handleSubmit = (event) => {
+    event.preventDefault()
+    auth.authenticate(this.state.username, this.state.password, () => {
       this.setState({ redirectToReferrer: true })
     })
   }
 
+  handleChange = (key, value) => {
+    this.setState({[key]: value})
+  }
+
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { redirectToReferrer } = this.state
+    const { redirectToReferrer, username, password } = this.state
     
     if (redirectToReferrer) {
       return (
@@ -27,12 +34,22 @@ class Login extends React.Component {
     }
     
     return (
-      <div>
+      <form onSubmit={this.handleSubmit} noValidate>
         <p>You must log in to view the page at {from.pathname}</p>
-        <input name="username" />
-        <input name="password" />
-        <button onClick={this.login}>Log in</button>
-      </div>
+        <input 
+          type="text" 
+          name="username" 
+          value={username} 
+          onChange={(ev) => this.handleChange('username', ev.target.value)}
+        />
+        <input 
+          type="password" 
+          name="password" 
+          value={password} 
+          onChange={(ev) => this.handleChange('password', ev.target.value)}
+        />
+        <input type="submit" value="Submit" />
+      </form>
     )
   }
 }

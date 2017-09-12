@@ -1,7 +1,7 @@
 const isAuthenticated = false;
 
 const authenticate = (name, password, callback) => {
-  if (name === "pavel" && password === "pavel123") {
+  if (name === 'pavel' && password === 'pavel123') {
     this.isAuthenticated = true
     setTimeout(callback, 100) // fake async
   } else {

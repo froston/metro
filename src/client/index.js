@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import App from './containers/App'
 import './normalize.css'
+import App from './containers/App'
 
 const render = Component => {
   ReactDOM.render(

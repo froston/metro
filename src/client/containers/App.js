@@ -5,7 +5,7 @@ import {
   Route, 
   Redirect, 
 } from 'react-router-dom'
-import { Header, Footer, UserList, Login  } from './'
+import { Layout, Login  } from './'
 import { auth } from '../helpers'
 import './App.css'
 
@@ -26,14 +26,10 @@ class App extends React.Component {
   render() {
     return <div>
         <Router>
-          <div>
-            <Header />
-            <Switch>
-              <Route path='/login' component={Login} />
-              <PrivateRoute path='/' component={UserList} />
-            </Switch>
-            <Footer />
-          </div>
+          <Switch>
+            <Route path='/login' component={Login} />
+            <PrivateRoute path='/' component={Layout} />
+          </Switch>
         </Router>
       </div>
   }
