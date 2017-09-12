@@ -31,7 +31,7 @@ class UserList extends React.Component {
             <li>id:{user.id} name:{user.name}</li>
           </ul>,
         )}
-        <button onClick={this.load} disabled={loading}>{loading ? "Loading..." : "Reload"}</button>
+        <button onClick={this.load} disabled={loading}>{loading ? 'Loading...' : 'Reload'}</button>
       </div>
   }
 }

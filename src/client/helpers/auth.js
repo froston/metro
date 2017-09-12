@@ -2,18 +2,21 @@ const isAuthenticated = false;
 
 const authenticate = (name, password, callback) => {
   if (name === 'pavel' && password === 'pavel123') {
-    this.isAuthenticated = true
-    setTimeout(callback, 100) // fake async
+    localStorage.setItem('isAuthenticated', true)
   } else {
-    this.isAuthenticated = false
-    setTimeout(callback, 100) // fake async
+    localStorage.setItem('isAuthenticated', false)
   }
-  
+  callback()
 }
+
 const signout = (callback) => {
-  this.isAuthenticated = false
-  setTimeout(callback, 100)
+  localStorage.setItem('isAuthenticated', false)
+  callback()
 }
+
+const isAuthenticated = () => 
+  localStorage.getItem('isAuthenticated') || false
+
 
 export {
     authenticate,

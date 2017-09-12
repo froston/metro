@@ -11,7 +11,7 @@ import './App.css'
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    auth.isAuthenticated ? (
+    auth.isAuthenticated() ? (
       <Component {...props}/>
     ) : (
       <Redirect to={{
