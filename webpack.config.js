@@ -1,20 +1,23 @@
-const path = require('path')
 const webpack = require('webpack')
+const path = require('path')
 
 const clientConfig = {
   devtool: 'cheap-module-source-map',
   target: 'web',
   entry: [
     'react-hot-loader/patch',
-    './src/client/index'
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+    './src/client/index.js'
   ],
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle.js',    
     path: path.resolve(__dirname, 'public'),
     publicPath: '/static/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       API_DEV: JSON.stringify('http://localhost:8080')
@@ -24,8 +27,7 @@ const clientConfig = {
     rules: [
       {
         test: /\.js$/,
-        loader: ['babel-loader'],
-        include: path.resolve(__dirname, 'src'),
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
@@ -36,18 +38,19 @@ const clientConfig = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: path.join(__dirname, "public"),
+    contentBase: path.join(__dirname, 'public'),
+    
     compress: true,
     hot: true,
-    hotOnly: true,
-    port: 3000
+    port: 3000,
+    open: true,
   },
   performance: {
     hints: false,
   },
 }
 
-const serverConfig = {
+/* const serverConfig = {
   devtool: 'cheap-module-source-map',
   target: 'node',
   entry: [
@@ -73,6 +76,6 @@ const serverConfig = {
       }
     ],
   },
-}
+} */
 
 module.exports = clientConfig

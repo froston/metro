@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import { App } from './containers'
+import App from './containers/App'
 import './normalize.css'
 
 const render = Component => {
   ReactDOM.render(
     <AppContainer>
-      <App />
+      <Component />
     </AppContainer>,
     document.getElementById('root')
   )
@@ -16,5 +16,5 @@ const render = Component => {
 render(App)
 
 if (module.hot) {
-  module.hot.accept('./containers/App', () => { render(App) })
+  module.hot.accept('./containers/App', () => render(App))
 }

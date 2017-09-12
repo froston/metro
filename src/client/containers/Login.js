@@ -3,12 +3,15 @@ import { Redirect } from 'react-router-dom';
 import { auth } from '../helpers'
 
 class Login extends React.Component {
-  state = {
-    redirectToReferrer: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      redirectToReferrer: false
+    }
   }
 
   login = () => {
-    auth.authenticate("pavel", "pavel123sddssdssdsd", () => {
+    auth.authenticate("pavel", "pavel123d", () => {
       this.setState({ redirectToReferrer: true })
     })
   }
@@ -26,6 +29,8 @@ class Login extends React.Component {
     return (
       <div>
         <p>You must log in to view the page at {from.pathname}</p>
+        <input name="username" />
+        <input name="password" />
         <button onClick={this.login}>Log in</button>
       </div>
     )
