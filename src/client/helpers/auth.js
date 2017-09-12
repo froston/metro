@@ -1,5 +1,3 @@
-const isAuthenticated = false;
-
 const authenticate = (name, password, callback) => {
   if (name === 'pavel' && password === 'pavel123') {
     localStorage.setItem('isAuthenticated', true)
@@ -14,11 +12,13 @@ const signout = (callback) => {
   callback()
 }
 
-const isAuthenticated = () => 
-  localStorage.getItem('isAuthenticated') || false
-
+const isAuthenticated = () => {
+  const isAuth = localStorage.getItem('isAuthenticated')
+  return isAuth === 'true' || isAuth === true
+}
 
 export {
     authenticate,
-    signout
+    signout,
+    isAuthenticated
 }

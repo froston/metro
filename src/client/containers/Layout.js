@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import { 
-  Switch, 
-  Route, 
+import {
+  Switch,
+  Route,
 } from 'react-router-dom'
-import { 
-  Header, 
-  Footer, 
+import {
+  Header,
+  Footer,
   UserList,
-  Home
+  Home,
+  Detail
 } from '../components'
 
 class Layout extends React.Component {
@@ -17,6 +18,7 @@ class Layout extends React.Component {
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/users' component={UserList} />
+        <Route exact path='/users/:id' component={Detail} />
       </Switch>
       <Footer />
     </div>

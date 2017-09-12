@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { Detail, Schedule } from './Users'
+import { users as userApi } from '../api'
 
 class UserList extends React.Component {
   constructor(props) {
@@ -10,15 +13,8 @@ class UserList extends React.Component {
   }
 
   load = () => {
-    this.setState({ loading: true })
-    fetch(`${API_DEV}/users`).then((response) => {
-      return response.json()
-    }).then((users)=>{
-      this.setState({users})
-      this.setState({ loading: false})
-    }).catch((err) => {
-      this.setState({ loading: false })
-      alert(err)
+    userApi.getUsers().then((response) => {
+      this.setState({users: response.data || []})
     })
   }
 
@@ -26,9 +22,9 @@ class UserList extends React.Component {
     const { users, loading } = this.state;
     return <div>
         <h1>Hello {users.length} Users</h1>
-        {users && users.map(user => 
+        {users && users.map(user =>
           <ul key={user.id}>
-            <li>id:{user.id} name:{user.name}</li>
+            <li><Link to={`${this.props.match.url}/${user.id}`}>{user.name}</Link></li>
           </ul>,
         )}
         <button onClick={this.load} disabled={loading}>{loading ? 'Loading...' : 'Reload'}</button>
