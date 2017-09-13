@@ -11,7 +11,7 @@ const clientConfig = {
     './src/client/index.js'
   ],
   output: {
-    filename: 'bundle.js',    
+    filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
     publicPath: '/static/'
   },
@@ -39,8 +39,6 @@ const clientConfig = {
   devServer: {
     historyApiFallback: true,
     contentBase: path.join(__dirname, 'public'),
-    
-    compress: true,
     hot: true,
     port: 3000,
     open: true,

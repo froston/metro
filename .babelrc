@@ -1,4 +1,11 @@
 {
-  "presets": [["es2015", { "modules": false }], "react"],
-  "plugins": ["react-hot-loader/babel", "transform-class-properties", "syntax-object-rest-spread"]
+  "presets": [
+    ["es2015", { "modules": false }],
+    "react"
+],
+  "plugins": [
+    "react-hot-loader/babel",
+    "transform-class-properties",
+    "syntax-object-rest-spread"
+  ]
 }

@@ -6,7 +6,16 @@
   "parser": "babel-eslint",
   "rules": {
     "quotes": [2, "single"],
-    "strict": [2, "never"]
+    "strict": [2, "never"],
+    "react/jsx-no-bind": [1, {
+      "allowArrowFunctions": true,
+      "allowBind": false,
+      "ignoreRefs": true
+    }],
+    "react/no-did-update-set-state": 0,
+    "react/no-unknown-property": 2,
+    "react/prop-types": 2,
+    "react/react-in-jsx-scope": 2
   },
   "plugins": [
     "react"

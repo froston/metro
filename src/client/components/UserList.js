@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Detail, Schedule } from './Users'
 import { users as userApi } from '../api'
@@ -31,6 +32,10 @@ class UserList extends React.Component {
         <button onClick={this.load} disabled={loading}>{loading ? 'Loading...' : 'Reload'}</button>
       </div>
   }
+}
+
+UserList.propTypes = {
+  match: PropTypes.object.isRequired
 }
 
 export default UserList

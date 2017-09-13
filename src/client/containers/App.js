@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { 
-  BrowserRouter as Router, 
-  Switch, 
-  Route, 
-  Redirect, 
+import PropTypes from 'prop-types'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
 } from 'react-router-dom'
 import { Layout, Login  } from './'
 import { auth } from '../helpers'
@@ -33,6 +34,15 @@ class App extends React.Component {
         </Router>
       </div>
   }
+}
+
+PrivateRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  location: PropTypes.object
+}
+
+PrivateRoute.defaultProps = {
+  location: {}
 }
 
 export default App
