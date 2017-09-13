@@ -1,6 +1,9 @@
 const users = [
-  {id: 1, name: 'Pavel Muller'},
-  {id: 2, name: 'Dante Costilla'}
+  {id: 1, name: 'Federico Villa'},
+  {id: 2, name: 'Pavel Muller'},
+  {id: 3, name: 'Dante Costilla'},
+  {id: 4, name: 'Pablo Hurtado'},
+  {id: 5, name: 'Jose Ayala'}
 ]
 
 /* getUsers = () => {
@@ -16,7 +19,9 @@ const users = [
 const getUsers = () => {
   // fake api
   return new Promise((resolve, reject) => {
-    resolve({data: users})
+    setTimeout(() => {
+      resolve({data: users})
+    }, 1000);
   });
 }
 

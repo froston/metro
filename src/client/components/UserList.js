@@ -13,8 +13,9 @@ class UserList extends React.Component {
   }
 
   load = () => {
+    this.setState({ loading: true })
     userApi.getUsers().then((response) => {
-      this.setState({users: response.data || []})
+      this.setState({users: response.data || [], loading: false})
     })
   }
 
