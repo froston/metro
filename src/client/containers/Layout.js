@@ -13,15 +13,17 @@ import {
 
 class Layout extends React.Component {
   render() {
-    return <div>
-      <Header />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/users' component={UserList} />
-        <Route exact path='/users/:id' component={Detail} />
-      </Switch>
-      <Footer />
-    </div>
+    return (
+      <div>
+        <Header />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/users' component={UserList} />
+          <Route exact path='/users/:id' component={Detail} />
+        </Switch>
+        <Footer />
+      </div>
+    )
   }
 }
 
