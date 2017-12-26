@@ -1,11 +1,14 @@
-const router = require('express').Router();
+const express = require('express');
+const passport = require('passport');
 const model = require('./model')
 
-router.route('/')
+const router = express.Router();
+
+router.route('/users')
   .get(model.getAll)
   .post(model.post)
 
-router.route('/:id')
+router.route('/users/:id')
   .get(model.getById)
   .put(model.update)
   .delete(model.delete)

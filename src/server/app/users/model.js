@@ -1,4 +1,4 @@
-let data = require('../data.json')
+let data = require('../../data.json')
 data = data.users
 
 exports.getAll = (req, res) => {
@@ -10,7 +10,7 @@ exports.getById = (req, res) =>{
   })
   if (user) {
     res.json(user)
-    res.status(200).send(user)
+    res.status(200).send(user).end()
   } else {
     res.status(404).send('User not found')
   }

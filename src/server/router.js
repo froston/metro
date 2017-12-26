@@ -1,10 +1,13 @@
-const routes = require('express').Router();
-const userController = require('./users/controller');
+const express = require('express');
+const passport = require('passport');
+const userController = require('./app/users/controller');
 
-routes.use('/users', userController);
+const router = express.Router();
 
-routes.get('/', (req, res) => {
-  res.status(200).json({ message: 'Connected!' });
+router.get('/', (req, res) => {
+  res.status(200).send('Welcome to API!');
 });
 
-module.exports = routes;
+router.use('/', passport.authenticate('basic', {session: false}), userController);
+
+module.exports = router;
