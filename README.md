@@ -8,10 +8,11 @@ Install dependencies and run server
 ```
 npm install
 
-npm start
+npm dev:client
+npm dev:server
 ```
 
-Then open http://localhost:3000/.
+Then open http://localhost:3000 and  http://localhost:8080/api.
 
 ## Built With
 

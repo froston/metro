@@ -6,13 +6,14 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 
 const router = require('./router');
+const config = require('./config/config');
 const strategy = require('./config/strategy');
 
 const app = express()
-const port = 8080
+const port = config.port
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: config.clientUrl,
   optionsSuccessStatus: 200
 }))
 
