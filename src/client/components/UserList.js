@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { Detail, Schedule } from './Users'
 import { users as userApi } from '../api'
 
 class UserList extends React.Component {
@@ -13,10 +12,14 @@ class UserList extends React.Component {
     }
   }
 
+  componentDidMount = () => {
+    this.load()
+  }
+
   load = () => {
     this.setState({ loading: true })
-    userApi.getUsers().then((response) => {
-      this.setState({users: response.data || [], loading: false})
+    userApi.getUsers().then((users) => {
+      this.setState({users: users || [], loading: false})
     })
   }
 

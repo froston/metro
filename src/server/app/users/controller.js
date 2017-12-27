@@ -11,6 +11,6 @@ router.route('/users')
 router.route('/users/:id')
   .get(model.getById)
   .put(model.update)
-  .delete(model.delete)
+  .delete(model.remove)
 
 module.exports = router;

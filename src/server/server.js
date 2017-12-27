@@ -1,11 +1,12 @@
 const path = require('path')
 const webpack = require('webpack')
+const passport = require('passport')
 const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors')
 
 const router = require('./router');
-const passport = require('./config/passport');
+const strategy = require('./config/strategy');
 
 const app = express()
 const port = 8080
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(passport.initialize());
+passport.use(strategy);
 
 app.use('/api', router);
 

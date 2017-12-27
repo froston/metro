@@ -1,28 +1,16 @@
 {
     "version": "0.1.0",
     "configurations": [
-        {
-            "type": "chrome",
-            "request": "attach",
-            "name": "Attach Chrome",
-            "port": 9222,
-            "url": "http://localhost:3000*",
-            "webRoot": "${workspaceRoot}/src",
-            "sourceMapPathOverrides": {
-                "webpack:///src/client/*": "${webRoot}/*"
-            }
-        },
-        {
-            "name": "Launch Chrome",
-            "type": "chrome",
-            "request": "launch",
-            "url": "http://localhost:3000*",
-            "webRoot": "${workspaceRoot}/src",
-            "userDataDir": "${workspaceRoot}/.chrome",
-            "sourceMapPathOverrides": {
-                "webpack:///src/*": "${webRoot}/*"
-            }
-        }
-        
+      {
+          "type": "chrome",
+          "request": "attach",
+          "name": "Attach Chrome",
+          "port": 9222,
+          "url": "http://localhost:3000*",
+          "webRoot": "${workspaceRoot}/src",
+          "sourceMapPathOverrides": {
+              "webpack:///src/client/*": "${webRoot}/*"
+          }
+      }
     ]
 }

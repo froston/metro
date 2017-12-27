@@ -20,7 +20,7 @@ const clientConfig = {
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
-      API_DEV: JSON.stringify('http://localhost:8080')
+      API_DEV: JSON.stringify('http://localhost:8080/api')
     })
   ],
   module: {

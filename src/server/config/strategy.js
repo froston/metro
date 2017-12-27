@@ -1,8 +1,7 @@
-const passport = require('passport');
 const { BasicStrategy } = require('passport-http');
 const { auth } = require('../app/auth/model');
 
-passport.use(new BasicStrategy(
+const strategy = new BasicStrategy(
   (username, password, callback) => {
     auth(username, password, (isMatch) => {
       if (!isMatch) {
@@ -11,6 +10,6 @@ passport.use(new BasicStrategy(
       return callback(null, { username, password });
     });
   }
-));
+)
 
-module.exports = passport
+module.exports = strategy

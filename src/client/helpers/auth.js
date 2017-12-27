@@ -1,9 +1,6 @@
 const authenticate = (name, password, callback) => {
-  if (name === 'pavel' && password === 'pavel123') {
-    localStorage.setItem('isAuthenticated', true)
-  } else {
-    localStorage.setItem('isAuthenticated', false)
-  }
+  localStorage.setItem('token', btoa(name+':'+password))
+  localStorage.setItem('isAuthenticated', true)
   callback()
 }
 

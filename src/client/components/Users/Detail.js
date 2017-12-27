@@ -1,15 +1,33 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Route } from 'react-router-dom'
+import { users as userApi } from '../../api'
 
-const Detail = (props) =>
-  <div>
-    {props.match.url}
-  </div>
+class Detail extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: {},
+    }
+  }
 
+  componentDidMount = () => {
+    this.load()
+  }
 
-Detail.propTypes = {
-  match: PropTypes.object.isRequired
+  load = () => {
+    userApi.getUserById(1).then((user) => {
+      this.setState({user: user || {}})
+    })
+  }
+
+  render() {
+    const { user } = this.state;
+    return (
+      <div>
+        <h1>Hello {user.name}</h1>
+      </div>
+    )
+  }
 }
 
 export default Detail
