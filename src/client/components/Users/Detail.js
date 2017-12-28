@@ -15,7 +15,8 @@ class Detail extends React.Component {
   }
 
   load = () => {
-    userApi.getUserById(1).then((user) => {
+    const { id } = this.props.match.params
+    userApi.getUserById(id).then((user) => {
       this.setState({user: user || {}})
     })
   }
@@ -28,6 +29,10 @@ class Detail extends React.Component {
       </div>
     )
   }
+}
+
+Detail.propTypes = {
+  match: PropTypes.object.isRequired
 }
 
 export default Detail
