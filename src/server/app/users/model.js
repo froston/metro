@@ -1,119 +1,58 @@
-let data = require('../../data.json')
-data = data.users
+const usersCollection = 'users'
 
-/**
- * @swagger
- * /users:
- *   get:
- *     tags: [Users]
- *     security:
- *      - auth: basic
- *     description: Get All Users
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: users
- */
-const getAll = (req, res) => {
-  res.status(200).send(data)
+const getAll = (db, cb) => {
+  const collection = db.collection(usersCollection)
+  collection.find({}).toArray((err, users) => {
+    if (err) { 
+      return console.log(err)
+    }
+    return cb(users)
+  })
 };
 
-/**
- * @swagger
- * /users/{id}:
- *   get:
- *     tags: [Users]
- *     security:
- *      - auth: basic
- *     description: Get User by Id
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         type: string
- *     responses:
- *       200:
- *         description: user
- */
-const getById = (req, res) =>{
-  const user = data.find((user) => {
-    return user.id === Number(req.params.id)
+const getById = (db, id, cb) =>{
+  const collection = db.collection(usersCollection)
+  collection.find({ _id: id }).toArray((err, user) => {
+    if (err) { 
+      return console.log(err)
+    }
+    return cb(user)
   })
-  if (user) {
-    res.json(user)
-    res.status(200).send(user).end()
-  } else {
-    res.status(404).send('User not found')
-  }
 }
 
-/**
- * @swagger
- * /users:
- *   post:
- *     tags: [Users]
- *     security:
- *      - auth: basic
- *     description: Get User by Id
- *     produces:
- *       - application/json
- *     responses:
- *       201:
- *         description: user
- */
-const post = (req, res) => {
-  console.log(req)
-  data.push(req.data)
-  res.status(201).send(data);
-};
-
-/**
- * @swagger
- * /users:
- *   patch:
- *     tags: [Users]
- *     security:
- *      - auth: basic
- *     description: Update User
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: user
- */
-const update = (req, res) => {
-  res.status(200).send([{id: 1, name: 'Test'}])
-};
-
-/**
- * @swagger
- * /users:
- *   delete:
- *     tags: [Users]
- *     security:
- *      - auth: basic
- *     description: Delete User
- *     produces:
- *       - application/json
- *     responses:
- *       202:
- *         description: user
- */
-const remove = (req, res) => {
-  const test = data.find((user) => {
-    return user.id === req.params.id
+const getByUsername = (db, username, password, cb) => {
+  const collection  = db.collection(usersCollection)
+  collection.findOne({ username }, (err, user) => {
+    if (err) { 
+      return console.log(err)
+    }
+    if (user) {
+      user.validPassword = (passwd) => user.password === passwd
+      cb(err, user)
+    } else {
+      cb(err, false)
+    }
   })
-  //delete test
-  res.status(202).send(data)
+}
+
+
+const post = (req, res) => {
+  return {}
+};
+
+const update = (req, res) => {
+  return {}
+};
+
+const remove = (req, res) => {
+  return {}
 }
 
 module.exports = {
   getAll,
   getById,
+  getByUsername,
   post,
   update,
-  remove
+  remove,
 }

@@ -1,16 +1,60 @@
 const express = require('express');
-const passport = require('passport');
 const model = require('./model')
 
 const router = express.Router();
 
-router.route('/users')
-  .get(model.getAll)
-  .post(model.post)
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     tags: [Users]
+ *     security:
+ *      - auth: basic
+ *     description: Get All Users
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: users
+ */
+router.get('/users', (req, res) => {
+  model.getAll(req.db, (users) => {
+    res.send(users)
+  })
+})
 
-router.route('/users/:id')
-  .get(model.getById)
-  .put(model.update)
-  .delete(model.remove)
+/**
+ * @swagger
+ * /users/{id}:
+ *   get:
+ *     tags: [Users]
+ *     security:
+ *      - auth: basic
+ *     description: Get User by Id
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: user
+ */
+router.get('/users/:id', (req, res) => {
+  const id = req.params.id
+  model.getById(req.db, id, (user) => {
+    res.send(user)
+  })
+})
+
+router.put('/users/:id', (req, res) => {
+  res.status(504)
+})
+
+router.delete('/users/:id', (req, res) => {
+  res.status(504)
+})
 
 module.exports = router;
