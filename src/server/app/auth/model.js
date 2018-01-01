@@ -8,7 +8,7 @@ const authenticate = (db, username, password, done) => {
     if (!user) { 
       return done(null, false); 
     }
-    if (!user.validPassword(password)) { 
+    if (user.password !== password ) { 
       return done(null, false); 
     }
     return done(null, user);

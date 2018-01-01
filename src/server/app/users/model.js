@@ -12,7 +12,7 @@ const getAll = (db, cb) => {
 
 const getById = (db, id, cb) =>{
   const collection = db.collection(usersCollection)
-  collection.find({ _id: id }).toArray((err, user) => {
+  collection.findOne({ username: 'pavel' }, (err, user) => {
     if (err) { 
       return console.log(err)
     }
@@ -27,7 +27,6 @@ const getByUsername = (db, username, password, cb) => {
       return console.log(err)
     }
     if (user) {
-      user.validPassword = (passwd) => user.password === passwd
       cb(err, user)
     } else {
       cb(err, false)
@@ -36,23 +35,41 @@ const getByUsername = (db, username, password, cb) => {
 }
 
 
-const post = (req, res) => {
-  return {}
+const create = (db, user, cb) => {
+  const collection  = db.collection(usersCollection)
+  collection.save({ user }, (err, user) => {
+    if (err) { 
+      return console.log(err)
+    }
+    return cb(user)
+  })
 };
 
-const update = (req, res) => {
-  return {}
+const update = (db, user, cb) => {
+  const collection  = db.collection(usersCollection)
+  collection.update({ user }, (err, user) => {
+    if (err) { 
+      return console.log(err)
+    }
+    return cb(user)
+  })
 };
 
-const remove = (req, res) => {
-  return {}
+const remove = (db, id, cb) => {
+  const collection  = db.collection(usersCollection)
+  collection.remove({ _id: id }, (err, user) => {
+    if (err) { 
+      return console.log(err)
+    }
+    return cb(user)
+  })
 }
 
 module.exports = {
   getAll,
   getById,
   getByUsername,
-  post,
+  create,
   update,
   remove,
 }
