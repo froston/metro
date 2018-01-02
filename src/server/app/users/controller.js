@@ -15,11 +15,11 @@ const router = express.Router();
  *       - application/json
  *     responses:
  *       200:
- *         description: users
+ *         description: OK
  */
 router.get('/users', (req, res) => {
   model.getAll(req.db, (users) => {
-    res.send(users)
+    res.status(200).send(users)
   })
 })
 
@@ -40,12 +40,12 @@ router.get('/users', (req, res) => {
  *         type: string
  *     responses:
  *       200:
- *         description: user
+ *         description: OK
  */
 router.get('/users/:id', (req, res) => {
   const id = req.params.id
   model.getById(req.db, id, (user) => {
-    res.send(user)
+    res.status(200).send(user)
   })
 })
 
@@ -60,13 +60,20 @@ router.get('/users/:id', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: user
- *         in: body
- *         required: true
- *         type: object
+ *       - in: body
+ *         name: user
+ *         schema:
+ *           type: object
+ *           properties:
+ *             username:
+ *               type: string
+ *             name:
+ *               type: string
+ *             admin:
+ *               type: boolean
  *     responses:
  *       201:
- *         description: user
+ *         description: Created
  */
 router.post('/users', (req, res) => {
   const user = req.params.user
@@ -86,18 +93,25 @@ router.post('/users', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         type: string
+ *       - in: body
+ *         name: user
+ *         schema:
+ *           type: object
+ *           properties:
+ *             username:
+ *               type: string
+ *             name:
+ *               type: string
+ *             admin:
+ *               type: boolean
  *     responses:
- *       201:
- *         description: user
+ *       200:
+ *         description: OK
  */
 router.patch('/users/:id', (req, res) => {
   const user = req.params.user
   model.update(req.db, user, (user) => {
-    res.status(201).send(user)
+    res.status(200).send(user)
   })
 })
 
@@ -118,12 +132,12 @@ router.patch('/users/:id', (req, res) => {
  *         type: string
  *     responses:
  *       201:
- *         description: user
+ *         description: OK
  */
 router.delete('/users/:id', (req, res) => {
   const id = req.params.id
   model.remove(req.db, id, (user) => {
-    res.status(203).send(user)
+    res.status(200).send(user)
   })
 })
 
