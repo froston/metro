@@ -19,7 +19,11 @@ const router = express.Router();
  */
 router.get('/users', (req, res) => {
   model.getAll(req.db, (users) => {
-    res.status(200).send(users)
+    if (users || users.length) {
+      res.status(users.length ? 200 : 404).send(users)
+    } else {
+      res.status(404).end()
+    }
   })
 })
 
@@ -45,7 +49,11 @@ router.get('/users', (req, res) => {
 router.get('/users/:id', (req, res) => {
   const id = req.params.id
   model.getById(req.db, id, (user) => {
-    res.status(200).send(user)
+    if (user) {
+      res.status(200).send(user)
+    } else {
+      res.status(404).end()
+    }
   })
 })
 
@@ -60,8 +68,8 @@ router.get('/users/:id', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - in: body
- *         name: user
+ *       - name: user
+ *         in: body
  *         schema:
  *           type: object
  *           properties:
@@ -76,9 +84,9 @@ router.get('/users/:id', (req, res) => {
  *         description: Created
  */
 router.post('/users', (req, res) => {
-  const user = req.params.user
-  model.create(req.db, user, (user) => {
-    res.status(201).send(user)
+  const user = req.body
+  model.create(req.db, user, (response) => {
+    res.status(201).send(response)
   })
 })
 
@@ -93,8 +101,12 @@ router.post('/users', (req, res) => {
  *     produces:
  *       - application/json
  *     parameters:
- *       - in: body
- *         name: user
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         type: string
+ *       - name: user
+ *         in: body
  *         schema:
  *           type: object
  *           properties:
@@ -109,9 +121,10 @@ router.post('/users', (req, res) => {
  *         description: OK
  */
 router.patch('/users/:id', (req, res) => {
-  const user = req.params.user
-  model.update(req.db, user, (user) => {
-    res.status(200).send(user)
+  const id = req.params.id
+  const user = req.body
+  model.update(req.db, id, user, (response) => {
+    res.status(200).send(response)
   })
 })
 
@@ -131,13 +144,13 @@ router.patch('/users/:id', (req, res) => {
  *         required: true
  *         type: string
  *     responses:
- *       201:
+ *       200:
  *         description: OK
  */
 router.delete('/users/:id', (req, res) => {
   const id = req.params.id
-  model.remove(req.db, id, (user) => {
-    res.status(200).send(user)
+  model.remove(req.db, id, (response) => {
+    res.status(200).send(response)
   })
 })
 

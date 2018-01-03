@@ -1,9 +1,11 @@
+const { ObjectID } = require('mongodb')
+
 const usersCollection = 'users'
 
 const getAll = (db, cb) => {
   const collection = db.collection(usersCollection)
   collection.find({}).toArray((err, users) => {
-    if (err) { 
+    if (err) {
       return console.log(err)
     }
     return cb(users)
@@ -12,8 +14,8 @@ const getAll = (db, cb) => {
 
 const getById = (db, id, cb) =>{
   const collection = db.collection(usersCollection)
-  collection.findOne({ username: 'pavel' }, (err, user) => {
-    if (err) { 
+  collection.findOne({ _id: ObjectID(id) }, (err, user) => {
+    if (err) {
       return console.log(err)
     }
     return cb(user)
@@ -23,7 +25,7 @@ const getById = (db, id, cb) =>{
 const getByUsername = (db, username, password, cb) => {
   const collection  = db.collection(usersCollection)
   collection.findOne({ username }, (err, user) => {
-    if (err) { 
+    if (err) {
       return console.log(err)
     }
     if (user) {
@@ -37,18 +39,18 @@ const getByUsername = (db, username, password, cb) => {
 
 const create = (db, user, cb) => {
   const collection  = db.collection(usersCollection)
-  collection.save({ user }, (err, user) => {
-    if (err) { 
+  collection.save(user, (err, user) => {
+    if (err) {
       return console.log(err)
     }
     return cb(user)
   })
 };
 
-const update = (db, user, cb) => {
+const update = (db, id, user, cb) => {
   const collection  = db.collection(usersCollection)
-  collection.update({ user }, (err, user) => {
-    if (err) { 
+  collection.update({ _id: ObjectID(id) }, { $set: user }, (err, user) => {
+    if (err) {
       return console.log(err)
     }
     return cb(user)
@@ -57,8 +59,8 @@ const update = (db, user, cb) => {
 
 const remove = (db, id, cb) => {
   const collection  = db.collection(usersCollection)
-  collection.remove({ _id: id }, (err, user) => {
-    if (err) { 
+  collection.remove({ _id: ObjectID(id) }, (err, user) => {
+    if (err) {
       return console.log(err)
     }
     return cb(user)
