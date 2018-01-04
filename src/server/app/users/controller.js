@@ -18,7 +18,10 @@ const router = express.Router();
  *         description: OK
  */
 router.get('/users', (req, res) => {
-  model.getAll(req.db, (users) => {
+  model.getAll(req.db, (err, users) => {
+    if (err) {
+      res.status(500).send(err)
+    }
     if (users || users.length) {
       res.status(users.length ? 200 : 404).send(users)
     } else {
@@ -48,7 +51,10 @@ router.get('/users', (req, res) => {
  */
 router.get('/users/:id', (req, res) => {
   const id = req.params.id
-  model.getById(req.db, id, (user) => {
+  model.getById(req.db, id, (err, user) => {
+    if (err) {
+      res.status(500).send(err)
+    }
     if (user) {
       res.status(200).send(user)
     } else {
@@ -73,9 +79,9 @@ router.get('/users/:id', (req, res) => {
  *         schema:
  *           type: object
  *           properties:
- *             username:
- *               type: string
  *             name:
+ *               type: string
+ *             username:
  *               type: string
  *             admin:
  *               type: boolean
@@ -85,7 +91,10 @@ router.get('/users/:id', (req, res) => {
  */
 router.post('/users', (req, res) => {
   const user = req.body
-  model.create(req.db, user, (response) => {
+  model.create(req.db, user, (err, response) => {
+    if (err) {
+      res.status(500).send(err)
+    }
     res.status(201).send(response)
   })
 })
@@ -123,7 +132,10 @@ router.post('/users', (req, res) => {
 router.patch('/users/:id', (req, res) => {
   const id = req.params.id
   const user = req.body
-  model.update(req.db, id, user, (response) => {
+  model.update(req.db, id, user, (err, response) => {
+    if (err) {
+      res.status(500).send(err)
+    }
     res.status(200).send(response)
   })
 })
@@ -149,7 +161,10 @@ router.patch('/users/:id', (req, res) => {
  */
 router.delete('/users/:id', (req, res) => {
   const id = req.params.id
-  model.remove(req.db, id, (response) => {
+  model.remove(req.db, id, (err, response) => {
+    if (err) {
+      res.status(500).send(err)
+    }
     res.status(200).send(response)
   })
 })

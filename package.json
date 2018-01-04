@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Metropolitan ministry app",
   "scripts": {
-    "dev:client": "webpack-dev-server",
+    "dev:client": "webpack-dev-server --inline --progress",
     "dev:server": "nodemon ./src/server/server.js",
     "build:client": "webpack ./src/client/index.js",
     "build:server": "webpack ./src/server/server.js"
@@ -14,7 +14,7 @@
     "body-parser": "1.18.2",
     "cors": "2.8.4",
     "express": "4.16.2",
-    "mongodb": "^3.0.1",
+    "mongodb": "3.0.1",
     "passport": "0.4.0",
     "passport-http": "^0.3.0",
     "prop-types": "15.6.0",
