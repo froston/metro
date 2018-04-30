@@ -17,18 +17,13 @@ const app = express()
 const port = config.port
 let db;
 
-app.use(cors({
-  origin: config.clientUrl,
-  optionsSuccessStatus: 200
-}))
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 MongoClient.connect(config.dbHost, (err, client) => {
   if (err) {
-		throw err;
-	} else {
+    console.error('API cannot connect to mongodb', err)
+  } else {
     db = client.db(config.dbName);
     console.log('API connected to mongodb')
   }
@@ -43,8 +38,8 @@ passport.use(strategy);
 
 // make DB available to all routes
 const exposeDb = (req, res, next) => {
-	req.db = db
-	next()
+  req.db = db
+  next()
 }
 app.use('/api', exposeDb, router)
 

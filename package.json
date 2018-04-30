@@ -2,14 +2,16 @@
   "name": "metro",
   "version": "0.1.1",
   "description": "Metropolitan ministry app",
+  "author": "Pavel Muller",
+  "license": "MIT",
+  "proxy": "http://localhost:5000/",
   "scripts": {
-    "dev:client": "webpack-dev-server --inline --progress",
-    "dev:server": "nodemon ./src/server/server.js",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "start:client": "webpack-dev-server --inline --progress",
+    "start:server": "nodemon ./src/server/server.js",
     "build:client": "webpack ./src/client/index.js",
     "build:server": "webpack ./src/server/server.js"
   },
-  "author": "Pavel Muller",
-  "license": "MIT",
   "dependencies": {
     "body-parser": "1.18.2",
     "cors": "2.8.4",
@@ -32,6 +34,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.5.1",
     "css-loader": "^0.28.4",
     "eslint": "^4.6.1",
     "eslint-plugin-react": "^7.3.0",
